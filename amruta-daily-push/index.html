@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>amruta-daily-push 开发日志</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:'Noto Serif SC','Source Han Serif SC','STSongti','Songti SC',Georgia,serif;background:#faf9f7;color:#1a1a1a;line-height:1.75;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 10%,rgba(180,160,140,0.06) 0%,transparent 60%),radial-gradient(ellipse at 80% 90%,rgba(160,180,160,0.04) 0%,transparent 50%);pointer-events:none;z-index:-1}
+.container{max-width:860px;margin:0 auto;padding:48px 32px 80px}
+h1{font-size:32px;font-weight:600;color:#1a1a1a;letter-spacing:.02em;margin-bottom:8px}
+.subtitle{font-size:14px;color:#999;font-family:-apple-system,BlinkMacSystemFont,'Noto Sans SC',sans-serif;margin-bottom:48px;letter-spacing:.03em}
+.entry{margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid #e8e5e0}
+.entry:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.entry-date{font-size:13px;color:#aaa;font-family:-apple-system,BlinkMacSystemFont,'Noto Sans SC',sans-serif;letter-spacing:.05em;margin-bottom:12px}
+.entry-title{font-size:20px;font-weight:500;color:#2c2c2c;margin-bottom:16px;line-height:1.4}
+.log-content{font-size:15px;color:#444;line-height:1.8}
+.log-content ul{margin:12px 0 16px 20px}
+.log-content li{margin-bottom:8px;padding-left:4px}
+.log-content li::marker{color:#bbb}
+.badge{display:inline-block;padding:2px 8px;background:#f0ede8;color:#888;font-size:12px;font-family:-apple-system,BlinkMacSystemFont,'Noto Sans SC',sans-serif;border-radius:4px;margin-right:6px}
+.badge-ok{background:#e8f4ee;color:#2a8a55}
+.badge-warn{background:#fef3e8;color:#c48a30}
+.badge-info{background:#e8edf4;color:#4a6a8a}
+footer{text-align:center;padding:32px 0 0;font-family:-apple-system,BlinkMacSystemFont,'Noto Sans SC',sans-serif;font-size:13px;color:#bbb}
+footer a{color:#888;text-decoration:none}
+footer a:hover{color:#444}
+@media(max-width:600px){.container{padding:24px 16px 48px}h1{font-size:24px}.entry-title{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>amruta-daily-push 开发日志</h1>
+<div class="subtitle">每日讲话推送 Pipeline — 2026-06-13 ~ 2026-06-14</div>
+
+<div class="entry">
+<div class="entry-date">2026-06-13</div>
+<div class="entry-title">中英文对齐 · 方案整合商思维</div>
+<div class="log-content">
+<p>昨晚搞中英文对齐搞到凌晨2:30，今早8点多继续，还没解决。</p>
+<ul>
+<li><span class="badge badge-warn">核心教训</span>一个AI在30分钟~1小时内迭代4-5次还解决不了同一个问题 → 核心算法或思路有问题</li>
+<li><span class="badge badge-ok">正确做法</span>这时候应该去网上找别人解决类似问题的成熟方案</li>
+<li><span class="badge badge-info">五遍原则</span>已写入 SOUL.md 作为永久规则</li>
+</ul>
+<p>当日其他记录：生活经验（物料要提前准备）、人际洞察（看清妻子行为模式）、06:50 早安提醒重复问"今天做什么"的修复。</p>
+</div>
+</div>
+
+<div class="entry">
+<div class="entry-date">2026-06-14</div>
+<div class="entry-title">翻译方案修正 · 去重检查更新 · Pipeline 审查</div>
+<div class="log-content">
+<p><span class="badge badge-warn">重大复盘</span>主人说"推送"= 触发 GitHub Actions，不是让我自己跑全套手动流程。</p>
+
+<p><strong>翻译方案修正：</strong></p>
+<ul>
+<li>不再自行翻译 amruta.today 文章</li>
+<li>改为从 IMA 知识库（sahaj 知识库 → sahaja amruta today 文件夹）获取官方翻译</li>
+<li>如果 IMA 知识库找不到当日文章，跳过翻译步骤，不自行翻译</li>
+</ul>
+
+<p><strong>去重检查更新：</strong></p>
+<ul>
+<li>更新了 step2_current.py（中英文双去重检查）</li>
+<li>已推送到 wherejiahe-bot/amruta-actions 仓库</li>
+</ul>
+
+<p><strong>Pipeline 测试与审查：</strong></p>
+<ul>
+<li><span class="badge badge-ok">Run Workflow 测试</span>#140 全部成功，约5分钟完成</li>
+<li><span class="badge badge-warn">问题</span>纯字符串去重无法识别语义重复</li>
+<li>HTML 中仍存在语义重复的句子（如 "Already you are exhausted" 和 "So many are exhausted..." 翻译相同）</li>
+</ul>
+
+<p><strong>语义去重方案探索（当日重点）：</strong></p>
+<ul>
+<li>合并前去重：SimHash / 向量相似度 / LLM 判断</li>
+<li>合并后去重：向量相似度 / MinHash LSH / 混合方案</li>
+<li>推荐：sentence-transformers 向量相似度（已有依赖、精准、中英双语）</li>
+<li>相似度阈值建议 0.85（保守去重，宁漏勿杀）</li>
+</ul>
+
+<p><strong>其他：</strong></p>
+<ul>
+<li>核心灵性认知更新："全部靠的是太初之母的注意力"</li>
+<li>措辞修正：不是"训练母亲专注"，而是"太初之母有没有把注意力放在你身上"</li>
+<li>推送反馈闭环：做任何任务必须有反馈——是否成功、等多久、去哪收结果</li>
+</ul>
+</div>
+</div>
+
+<footer>
+<a href="../index.html">← 返回总览</a> · 日志最后更新 2026-06-14
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开发日志 — 总览</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:'Noto Serif SC','Source Han Serif SC','STSongti','Songti SC',Georgia,serif;background:#faf9f7;color:#1a1a1a;line-height:1.75;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 8%,rgba(180,160,140,0.06) 0%,transparent 50%),radial-gradient(ellipse at 85% 92%,rgba(200,180,160,0.04) 0%,transparent 40%);pointer-events:none;z-index:-1}
+.container{max-width:780px;margin:0 auto;padding:48px 32px 80px}
+h1{font-size:36px;font-weight:600;color:#1a1a1a;letter-spacing:.02em;margin-bottom:6px}
+.subtitle{font-size:14px;color:#999;font-family:-apple-system,BlinkMacSystemFont,'Noto Sans SC',sans-serif;margin-bottom:48px;letter-spacing:.03em}
+.project-card{background:rgba(255,255,255,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.8);border-radius:12px;padding:24px 28px;margin-bottom:20px;transition:border-color .2s,box-shadow .2s;text-decoration:none;color:inherit;display:block}
+.project-card:hover{border-color:rgba(138,122,106,0.3);box-shadow:0 2px 16px rgba(0,0,0,0.04)}
+.project-card:last-child{margin-bottom:0}
+.project-name{font-size:18px;font-weight:500;color:#2c2c2c;margin-bottom:6px}
+.project-desc{font-size:14px;color:#777;margin-bottom:12px}
+.project-links{display:flex;gap:16px;font-size:13px;color:#888;font-family:-apple-system,BlinkMacSystemFont,'Noto Sans SC',sans-serif}
+.project-links a{color:#8a7a6a;text-decoration:none;transition:color .15s}
+.project-links a:hover{color:#444}
+footer{text-align:center;padding:32px 0 0;font-family:-apple-system,BlinkMacSystemFont,'Noto Sans SC',sans-serif;font-size:13px;color:#bbb}
+@media(max-width:600px){.container{padding:24px 16px 48px}h1{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>开发日志</h1>
+<div class="subtitle">各项目开发过程中的对话记录、方案讨论、问题排查、决策过程</div>
+
+<a href="amruta-daily-push/index.html" class="project-card">
+<div class="project-name">amruta-daily-push</div>
+<div class="project-desc">每日 Shri Mataji 讲话推送 Pipeline — GitHub Actions 自动化翻译、对齐、HTML 构建、邮件发送</div>
+<div class="project-links">
+<a href="amruta-daily-push/index.html">查看日志 →</a>
+<a href="https://github.com/wherejiahe-bot/amruta-actions" target="_blank">Actions 仓库 →</a>
+</div>
+</a>
+
+<footer>
+日志格式：按日期记录，包含问题描述、解决方案、经验教训
+</footer>
+</div>
+</body>
+</html>
